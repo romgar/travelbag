@@ -1,5 +1,11 @@
 <html>
   <meta charset="utf-8" />
+  <style>
+    ul {
+      list-style-type: none;
+    }
+  </style>
+
   <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -58,11 +64,17 @@
     }
 
     function generateLists(itemsToDisplay) {
-      for (var i = 0; i < itemsToDisplay.length; i++) {
-        const formItem = itemsToDisplay[i];
-        $(`div#${formItem.category} ul`).append(
-          `<li><input type="checkbox" data-id="${formItem.id}">${formItem.label}</input></li>`
-        );
+      const keys = Object.keys(itemsToDisplay);
+
+      for (var i = 0; i < keys.length; i++) {
+        const category = keys[i];
+        const categoryList = itemsToDisplay[category];
+        for (var j = 0; j < categoryList.length; j++) {
+          const label = categoryList[j];
+          $(`div#${category} ul`).append(
+            `<li><input type="checkbox" data-id="${label}">${label}</input></li>`
+          );
+        }
       }
     }
 
@@ -90,12 +102,10 @@
       });
     });
 
-    const ITEMS_TO_DISPLAY = [
-      {
-        id: 1,
-        label: "Nappies",
-        category: "Romain"
-      }
-    ];
+    const ITEMS_TO_DISPLAY = {
+      Aurelie: ["Makeup"],
+      Alice: ["Nappies"],
+      Romain: ["Switch"]
+    };
   </script>
 </html>
