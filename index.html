@@ -1,85 +1,101 @@
 <html>
-
-    <script
+  <meta charset="utf-8" />
+  <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script>
+    crossorigin="anonymous"
+  ></script>
 
-<body>
-    <div>List of items</div>
+  <body>
+    <h1>List of items</h1>
     <form action="#">
-    <ul>
-        <li><input type="checkbox" data-id="1"></input></li>
-        <li><input type="checkbox" data-id="2"></input></li>
-        <li><input type="checkbox" data-id="3"></input></li>
-        <li><input type="checkbox" data-id="4"></input></li>
-        <li><input type="checkbox" data-id="5"></input></li>
-        <li><input type="checkbox" data-id="6"></input></li>
-        <li><input type="checkbox" data-id="7"></input></li>
-        <li><input type="checkbox" data-id="8"></input></li>
-        <li><input type="checkbox" data-id="9"></input></li>
-        <li><input type="checkbox" data-id="10"></input></li>
-        <li><input type="checkbox" data-id="11"></input></li>
-        <li><input type="checkbox" data-id="12"></input></li>
-        <li><input type="checkbox" data-id="13"></input></li>
-        <li><input type="checkbox" data-id="14"></input></li>
-    </ul>
-    <div>
+      <div id="Aurelie">
+        <h2>Aurelie</h2>
+        <ul></ul>
+      </div>
+      <div id="Alice">
+        <h2>Alice</h2>
+        <ul></ul>
+      </div>
+      <div id="Romain">
+        <h2>Romain</h2>
+        <ul></ul>
+      </div>
+      <div>
         <button id="reset">Reset</button>
-    </div>
+      </div>
     </form>
-</body>
+  </body>
 
-<script>
-    const LOCAL_STORAGE_DATA_KEY = 'selectedItems'
+  <script>
+    const LOCAL_STORAGE_DATA_KEY = "selectedItems";
 
     function getSelectedItems() {
-        const myStorage = window.localStorage;
-        const selectedItems = JSON.parse(localStorage.getItem(LOCAL_STORAGE_DATA_KEY));
-        return selectedItems;
+      const myStorage = window.localStorage;
+      const selectedItems = JSON.parse(
+        localStorage.getItem(LOCAL_STORAGE_DATA_KEY)
+      );
+      return selectedItems;
     }
 
     function setSelectedItems(items) {
-        const myStorage = window.localStorage;
-        localStorage.setItem(LOCAL_STORAGE_DATA_KEY, JSON.stringify(items));
+      const myStorage = window.localStorage;
+      localStorage.setItem(LOCAL_STORAGE_DATA_KEY, JSON.stringify(items));
     }
 
     function refreshItems() {
-        const items = getSelectedItems();
-        $("[data-id]").prop('checked', false);
-        if (!!items) {
-            for (const item of items) {
-                $(`[data-id="${item}"]`).prop('checked', true);
-            }
+      const items = getSelectedItems();
+      $("[data-id]").prop("checked", false);
+      if (!!items) {
+        for (const item of items) {
+          $(`[data-id="${item}"]`).prop("checked", true);
         }
+      }
     }
 
     function resetItems(event) {
-        localStorage.removeItem(LOCAL_STORAGE_DATA_KEY);
+      localStorage.removeItem(LOCAL_STORAGE_DATA_KEY);
     }
 
-    $( document ).ready(function() {
+    function generateLists(itemsToDisplay) {
+      for (var i = 0; i < itemsToDisplay.length; i++) {
+        const formItem = itemsToDisplay[i];
+        $(`div#${formItem.category} ul`).append(
+          `<li><input type="checkbox" data-id="${formItem.id}">${formItem.label}</input></li>`
+        );
+      }
+    }
 
-        refreshItems();
+    $(document).ready(function() {
+      generateLists(ITEMS_TO_DISPLAY);
 
-        $('li input').change(function(event){ 
-            const selectedItems = [];
-            $('li input:checked').each(function() {
-                selectedItems.push($(this).attr('data-id'));
-            });
-            setSelectedItems(selectedItems);
+      refreshItems();
+
+      $("li input").change(function(event) {
+        const selectedItems = [];
+        $("li input:checked").each(function() {
+          selectedItems.push($(this).attr("data-id"));
         });
+        setSelectedItems(selectedItems);
+      });
 
-        $('#reset').click(function(event) {
-            event.preventDefault();
+      $("#reset").click(function(event) {
+        event.preventDefault();
 
-            const isSure = confirm('Are you sure?');
-            if (isSure == true) {
-                resetItems();
-                refreshItems();
-            }
-        });
+        const isSure = confirm("Are you sure?");
+        if (isSure == true) {
+          resetItems();
+          refreshItems();
+        }
+      });
     });
 
-</script>
+    const ITEMS_TO_DISPLAY = [
+      {
+        id: 1,
+        label: "Nappies",
+        category: "Romain"
+      }
+    ];
+  </script>
 </html>
