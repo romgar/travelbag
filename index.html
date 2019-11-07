@@ -11,26 +11,34 @@
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
     crossorigin="anonymous"
   ></script>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
 
   <body>
     <h1>List of items</h1>
-    <form action="#">
-      <div id="Aurelie">
-        <h2>Aurelie</h2>
-        <ul></ul>
+    <div class="container">
+      <div class="row">
+        <div id="Aurelie" class="col-sm">
+          <h2>Aurelie</h2>
+          <ul></ul>
+        </div>
+        <div id="Alice" class="col-sm">
+          <h2>Alice</h2>
+          <ul></ul>
+        </div>
+        <div id="Romain" class="col-sm">
+          <h2>Romain</h2>
+          <ul></ul>
+        </div>
       </div>
-      <div id="Alice">
-        <h2>Alice</h2>
-        <ul></ul>
-      </div>
-      <div id="Romain">
-        <h2>Romain</h2>
-        <ul></ul>
-      </div>
-      <div>
-        <button id="reset">Reset</button>
-      </div>
-    </form>
+    </div>
+    <div>
+      <button id="reset">Reset</button>
+    </div>
   </body>
 
   <script>
