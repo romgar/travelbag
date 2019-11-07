@@ -80,7 +80,7 @@
         for (var j = 0; j < categoryList.length; j++) {
           const label = categoryList[j];
           $(`div#${category} ul`).append(
-            `<li><input type="checkbox" data-id="${label}">${label}</input></li>`
+            `<li><input type="checkbox" data-id="${label}" id="${label}"/><label for="${label}">${label}</label></li>`
           );
         }
       }
@@ -111,7 +111,7 @@
     });
 
     const ITEMS_TO_DISPLAY = {
-      Aurelie: ["Makeup"],
+      Aurelie: ["Makeup", "Jewellery"],
       Alice: ["Nappies"],
       Romain: ["Switch"]
     };
