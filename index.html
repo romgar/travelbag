@@ -1,0 +1,85 @@
+<html>
+
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+
+<body>
+    <div>List of items</div>
+    <form action="#">
+    <ul>
+        <li><input type="checkbox" data-id="1"></input></li>
+        <li><input type="checkbox" data-id="2"></input></li>
+        <li><input type="checkbox" data-id="3"></input></li>
+        <li><input type="checkbox" data-id="4"></input></li>
+        <li><input type="checkbox" data-id="5"></input></li>
+        <li><input type="checkbox" data-id="6"></input></li>
+        <li><input type="checkbox" data-id="7"></input></li>
+        <li><input type="checkbox" data-id="8"></input></li>
+        <li><input type="checkbox" data-id="9"></input></li>
+        <li><input type="checkbox" data-id="10"></input></li>
+        <li><input type="checkbox" data-id="11"></input></li>
+        <li><input type="checkbox" data-id="12"></input></li>
+        <li><input type="checkbox" data-id="13"></input></li>
+        <li><input type="checkbox" data-id="14"></input></li>
+    </ul>
+    <div>
+        <button id="reset">Reset</button>
+    </div>
+    </form>
+</body>
+
+<script>
+    const LOCAL_STORAGE_DATA_KEY = 'selectedItems'
+
+    function getSelectedItems() {
+        const myStorage = window.localStorage;
+        const selectedItems = JSON.parse(localStorage.getItem(LOCAL_STORAGE_DATA_KEY));
+        return selectedItems;
+    }
+
+    function setSelectedItems(items) {
+        const myStorage = window.localStorage;
+        localStorage.setItem(LOCAL_STORAGE_DATA_KEY, JSON.stringify(items));
+    }
+
+    function refreshItems() {
+        const items = getSelectedItems();
+        $("[data-id]").prop('checked', false);
+        if (!!items) {
+            for (const item of items) {
+                $(`[data-id="${item}"]`).prop('checked', true);
+            }
+        }
+    }
+
+    function resetItems(event) {
+        localStorage.removeItem(LOCAL_STORAGE_DATA_KEY);
+    }
+
+    $( document ).ready(function() {
+
+        refreshItems();
+
+        $('li input').change(function(event){ 
+            const selectedItems = [];
+            $('li input:checked').each(function() {
+                selectedItems.push($(this).attr('data-id'));
+            });
+            setSelectedItems(selectedItems);
+        });
+
+        $('#reset').click(function(event) {
+            event.preventDefault();
+
+            const isSure = confirm('Are you sure?');
+            if (isSure == true) {
+                resetItems();
+                refreshItems();
+            }
+        });
+    });
+
+</script>
+</html>
