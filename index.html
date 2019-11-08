@@ -22,16 +22,20 @@
     <h1>List of items</h1>
     <div class="container">
       <div class="row">
-        <div id="Aurelie" class="col-sm">
-          <h2>Aurelie</h2>
-          <ul></ul>
-        </div>
         <div id="Alice" class="col-sm">
           <h2>Alice</h2>
           <ul></ul>
         </div>
+        <div id="Aurelie" class="col-sm">
+          <h2>Aurelie</h2>
+          <ul></ul>
+        </div>
         <div id="Romain" class="col-sm">
           <h2>Romain</h2>
+          <ul></ul>
+        </div>
+        <div id="LesParents" class="col-sm">
+          <h2>Les parents</h2>
           <ul></ul>
         </div>
       </div>
@@ -80,7 +84,7 @@
         for (var j = 0; j < categoryList.length; j++) {
           const label = categoryList[j];
           $(`div#${category} ul`).append(
-            `<li><input type="checkbox" data-id="${label}" id="${label}"/><label for="${label}">${label}</label></li>`
+            `<li><input type="checkbox" data-id="${category}-${label}" id="${category}-${label}"/><label for="${category}-${label}">${label}</label></li>`
           );
         }
       }
@@ -111,9 +115,125 @@
     });
 
     const ITEMS_TO_DISPLAY = {
-      Aurelie: ["Makeup", "Jewellery"],
-      Alice: ["Nappies"],
-      Romain: ["Switch"]
+      Aurelie: [
+        "Anti-histaminiques",
+        "Paracetamol",
+        "Mouchoirs",
+        "Culottes",
+        "Soutien-gorges",
+        "Chaussettes",
+        "Pyjamas",
+        "Pantalons",
+        "Hauts",
+        "Pulls",
+        "Gilets",
+        "Produits de beauté",
+        "Peigne",
+        "Livres",
+        "Pilule",
+        "Serviettes hygièniques",
+        "Kobo",
+        "Collants",
+        "Robe"
+      ],
+      Alice: [
+        ">> Habillage",
+        "Couches",
+        "Lingettes",
+        "Serviette à langer",
+        "Désinfectant main",
+        "Liniment Oléo-calcaire",
+        "Cottons",
+        "Bavoirs",
+        "Manteau",
+        "Chapeau",
+        "Gants",
+        "Chaussettes",
+        "Pantalons",
+        "Hauts",
+        "Body manches longues",
+        "Body manches courtes",
+        "Pyjamas",
+        "Gilets",
+        "Chaussures",
+        ">> Soin:",
+        "Mouche-nez",
+        "Paracetamol",
+        "Bonjela",
+        "Spray pour le nez",
+        "Crème pour les fesses",
+        ">> Bain:",
+        "Coupe ongle",
+        "Brosse à cheveux",
+        "Jouets pour le bain",
+        "Gants",
+        "Produit pour le bain",
+        "Brosse a dents",
+        ">> Dodo:",
+        "Turbulettes",
+        "Tétines",
+        "Doudous",
+        "Etoile",
+        "Piles AA",
+        "Veilleuse",
+        "Baby phone",
+        ">> Manger:",
+        "Bavoirs pour manger",
+        "Lait en poudre",
+        "Petits pots vides en plastiques",
+        "Gobelet 360",
+        "Biberons",
+        "Brosse à laver les biberons",
+        "Pastilles à steriliser",
+        "Crackers",
+        "Petits pots salés",
+        "Compotes de fruits",
+        "Thermos biberons",
+        ">> Utile:",
+        "Mousselines",
+        "Porte-bébé",
+        "Porte-tétine",
+        "Jouets pour le trajet",
+        "Activités (dessin)",
+        "Ficelles jouets poussette",
+        "Poussette",
+        "Protège-pluie poussette",
+        "Livres",
+        "Couverture",
+        "Oreiller"
+      ],
+      Romain: [
+        "Boxers",
+        "Chaussettes",
+        "Pantalons",
+        "Hauts",
+        "Pulls",
+        "Gilets",
+        "Produits de beauté",
+        "Livres",
+        "Ordinateur"
+      ],
+      LesParents: [
+        "Tablette (avec des films/séries)",
+        "Chargeurs",
+        "Brosses à dents",
+        "Chargeurs brosses à dents",
+        "Passeports",
+        "Billets (train ou avion)",
+        "Jeux societe (Skull King)",
+        "Parapluies",
+        "Écouteurs",
+        "Mouchoirs",
+        "Cadenas",
+        "Check-in avion",
+        "Adaptateur prise electrique",
+        "Batteries",
+        "Euros",
+        "Lunettes de soleil",
+        "Chaussures",
+        "Chaussons",
+        "Pantalons pour trainer"
+      ]
     };
   </script>
 </html>
