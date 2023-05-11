@@ -26,6 +26,10 @@
           <h2>Alice</h2>
           <ul></ul>
         </div>
+        <div id="Eva" class="col-sm">
+          <h2>Eva</h2>
+          <ul></ul>
+        </div>
         <div id="Aurelie" class="col-sm">
           <h2>Aurelie</h2>
           <ul></ul>
@@ -38,6 +42,10 @@
           <h2>Les parents</h2>
           <ul></ul>
         </div>
+        <div id="ModeLocation" class="col-sm">
+          <h2>Mode Location</h2>
+          <ul></ul>
+        </div>
       </div>
     </div>
     <div>
@@ -46,7 +54,7 @@
   </body>
 
   <script>
-    const LOCAL_STORAGE_DATA_KEY = "selectedItems";
+    const LOCAL_STORAGE_DATA_KEY = 'selectedItems';
 
     function getSelectedItems() {
       const myStorage = window.localStorage;
@@ -63,10 +71,10 @@
 
     function refreshItems() {
       const items = getSelectedItems();
-      $("[data-id]").prop("checked", false);
+      $('[data-id]').prop('checked', false);
       if (!!items) {
         for (const item of items) {
-          $(`[data-id="${item}"]`).prop("checked", true);
+          $(`[data-id="${item}"]`).prop('checked', true);
         }
       }
     }
@@ -79,34 +87,47 @@
       const keys = Object.keys(itemsToDisplay);
 
       for (var i = 0; i < keys.length; i++) {
-        const category = keys[i];
-        const categoryList = itemsToDisplay[category];
-        for (var j = 0; j < categoryList.length; j++) {
-          const label = categoryList[j];
-          $(`div#${category} ul`).append(
-            `<li><input type="checkbox" data-id="${category}-${label}" id="${category}-${label}"/><label for="${category}-${label}">${label}</label></li>`
+        const person = keys[i];
+        const personList = itemsToDisplay[person];
+        const categoryKeys = Object.keys(personList);
+
+        for (
+          var categoryNum = 0;
+          categoryNum < categoryKeys.length;
+          categoryNum++
+        ) {
+          const currentCategory = categoryKeys[categoryNum];
+          $(`div#${person} ul`).append(
+            `<h3>
+                ${currentCategory}</h3>`
           );
+          for (var j = 0; j < personList[currentCategory].length; j++) {
+            const label = personList[currentCategory][j];
+            $(`div#${person} ul`).append(
+              `<li><input type="checkbox" data-id="${person}-${currentCategory}-${label}" id="${person}-${currentCategory}-${label}"/><label for="${person}-${currentCategory}-${label}">${label}</label></li>`
+            );
+          }
         }
       }
     }
 
-    $(document).ready(function() {
+    $(document).ready(function () {
       generateLists(ITEMS_TO_DISPLAY);
 
       refreshItems();
 
-      $("li input").change(function(event) {
+      $('li input').change(function (event) {
         const selectedItems = [];
-        $("li input:checked").each(function() {
-          selectedItems.push($(this).attr("data-id"));
+        $('li input:checked').each(function () {
+          selectedItems.push($(this).attr('data-id'));
         });
         setSelectedItems(selectedItems);
       });
 
-      $("#reset").click(function(event) {
+      $('#reset').click(function (event) {
         event.preventDefault();
 
-        const isSure = confirm("Are you sure?");
+        const isSure = confirm('Are you sure?');
         if (isSure == true) {
           resetItems();
           refreshItems();
@@ -115,125 +136,196 @@
     });
 
     const ITEMS_TO_DISPLAY = {
-      Aurelie: [
-        "Anti-histaminiques",
-        "Paracetamol",
-        "Mouchoirs",
-        "Culottes",
-        "Soutien-gorges",
-        "Chaussettes",
-        "Pyjamas",
-        "Pantalons",
-        "Hauts",
-        "Pulls",
-        "Gilets",
-        "Produits de beauté",
-        "Peigne",
-        "Livres",
-        "Pilule",
-        "Serviettes hygièniques",
-        "Kobo",
-        "Collants",
-        "Robe"
-      ],
-      Alice: [
-        ">> Habillage",
-        "Couches",
-        "Lingettes",
-        "Serviette à langer",
-        "Désinfectant main",
-        "Liniment Oléo-calcaire",
-        "Cottons",
-        "Bavoirs",
-        "Manteau",
-        "Chapeau",
-        "Gants",
-        "Chaussettes",
-        "Pantalons",
-        "Hauts",
-        "Body manches longues",
-        "Body manches courtes",
-        "Pyjamas",
-        "Gilets",
-        "Chaussures",
-        ">> Soin:",
-        "Mouche-nez",
-        "Paracetamol",
-        "Bonjela",
-        "Spray pour le nez",
-        "Crème pour les fesses",
-        ">> Bain:",
-        "Coupe ongle",
-        "Brosse à cheveux",
-        "Jouets pour le bain",
-        "Gants",
-        "Produit pour le bain",
-        "Brosse a dents",
-        ">> Dodo:",
-        "Turbulettes",
-        "Tétines",
-        "Doudous",
-        "Etoile",
-        "Piles AA",
-        "Veilleuse",
-        "Baby phone",
-        ">> Manger:",
-        "Bavoirs pour manger",
-        "Lait en poudre",
-        "Petits pots vides en plastiques",
-        "Gobelet 360",
-        "Biberons",
-        "Brosse à laver les biberons",
-        "Pastilles à steriliser",
-        "Crackers",
-        "Petits pots salés",
-        "Compotes de fruits",
-        "Thermos biberons",
-        ">> Utile:",
-        "Mousselines",
-        "Porte-bébé",
-        "Porte-tétine",
-        "Jouets pour le trajet",
-        "Activités (dessin)",
-        "Ficelles jouets poussette",
-        "Poussette",
-        "Protège-pluie poussette",
-        "Livres",
-        "Couverture",
-        "Oreiller"
-      ],
-      Romain: [
-        "Boxers",
-        "Chaussettes",
-        "Pantalons",
-        "Hauts",
-        "Pulls",
-        "Gilets",
-        "Produits de beauté",
-        "Livres",
-        "Ordinateur"
-      ],
-      LesParents: [
-        "Tablette (avec des films/séries)",
-        "Chargeurs",
-        "Brosses à dents",
-        "Chargeurs brosses à dents",
-        "Passeports",
-        "Billets (train ou avion)",
-        "Jeux societe (Skull King)",
-        "Parapluies",
-        "Écouteurs",
-        "Mouchoirs",
-        "Cadenas",
-        "Check-in avion",
-        "Adaptateur prise electrique",
-        "Batteries",
-        "Euros",
-        "Lunettes de soleil",
-        "Chaussures",
-        "Chaussons",
-        "Pantalons pour trainer"
-      ]
+      Aurelie: {
+        General: [
+          'Anti-histaminiques',
+          'Paracetamol',
+          'Mouchoirs',
+          'Culottes',
+          'Soutien-gorges',
+          'Chaussettes',
+          'Pyjamas',
+          'Pantalons',
+          'Hauts',
+          'Pulls',
+          'Gilets',
+          'Produits de beauté',
+          'Peigne',
+          'Livres',
+          'Pilule',
+          'Serviettes hygièniques',
+          'Kobo',
+          'Collants',
+          'Robe',
+        ],
+      },
+      Alice: {
+        Habillage: [
+          'Culottes',
+          'Colants',
+          'Manteau',
+          'Chapeau',
+          'Gants',
+          'Chaussettes',
+          'Pantalons',
+          'Jupes',
+          'Robes',
+          'Hauts',
+          'Pyjamas',
+          'Gilets',
+          'Chaussures',
+        ],
+        Soin: ['Paracetamol', 'Crème pour les fesses', 'Vitamines'],
+        'Bain / Hygiene': [
+          'Lingettes',
+          'Gel douche',
+          'Brosse a dents',
+          'Dentifrice',
+          'Chouchous',
+          'Coupe ongle',
+          'Brosse à cheveux',
+          'Serviette bain',
+        ],
+        Dodo: [
+          'Doudous x 2',
+          'Veilleuse',
+          'Baby phone',
+          'Peluche',
+          'Draps lit',
+        ],
+        Manger: ['Bavoirs pour manger', 'Compotes de fruits', 'Gourde'],
+        Utile: ['Jouets pour le trajet', 'Activités (dessin)', 'Livres'],
+      },
+      Eva: {
+        Habillage: [
+          'Couches',
+          'Lingettes',
+          'Serviette à langer',
+          'Liniment Oléo-calcaire',
+          'Cottons',
+          'Bavoirs',
+          'Manteau',
+          'Chapeau',
+          'Gants',
+          'Chaussettes',
+          'Pantalons',
+          'Hauts',
+          'Body manches longues',
+          'Body manches courtes',
+          'Pyjamas',
+          'Gilets',
+          'Chaussures',
+        ],
+        Soin: [
+          'Mouche-nez',
+          'Paracetamol',
+          'Spray pour le nez',
+          'Crème pour les fesses',
+          'Crème visage/boutons',
+          'Brosse à dents',
+          'Dentifrice',
+          'Gel douche',
+          'Serviette bain',
+          'Vitamines',
+        ],
+        'Bain / Hygiene': [
+          'Lingettes',
+          'Gel douche',
+          'Brosse a dents',
+          'Dentifrice',
+          'Chouchous',
+          'Coupe ongle',
+          'Brosse à cheveux',
+          'Serviette bain',
+        ],
+        Dodo: [
+          'Tetines x 3',
+          'Doudous x 2',
+          'Peluche',
+          'Baby phone',
+          'Turbulette',
+          'Lit parapluie + matelas + draps',
+        ],
+        Manger: [
+          'Bavoirs pour manger',
+          'Biberons',
+          'Brosse à laver les biberons',
+          'Petits pots salés',
+          'Compotes de fruits',
+          'Gourde',
+        ],
+        Utile: [
+          'Porte-bébé',
+          'Attache-tétine',
+          'Jouets pour le trajet',
+          'Poussette',
+          'Protège-pluie poussette',
+          'Livres',
+        ],
+      },
+      Romain: {
+        general: [
+          'Boxers',
+          'Chaussettes',
+          'Pantalons',
+          'Hauts',
+          'Pulls',
+          'Gilets',
+          'Produits de beauté',
+          'Livres',
+          'Ordinateur',
+        ],
+      },
+      LesParents: {
+        general: [
+          'Tablette (avec des films/séries)',
+          'Chargeurs',
+          'Brosses à dents',
+          'Chargeurs brosses à dents',
+          'Passeports',
+          'Billets (train ou avion)',
+          'Jeux societe (Skull King)',
+          'Parapluies',
+          'Écouteurs',
+          'Mouchoirs',
+          'Cadenas',
+          'Check-in avion',
+          'Adaptateur prise electrique',
+          'Batteries',
+          'Euros',
+          'Lunettes de soleil',
+          'Chaussures',
+          'Chaussons',
+          'Pantalons pour trainer',
+        ],
+      },
+      ModeLocation: {
+        Jeux: [
+          'Jeux Alice + Eva',
+          'Livres Alice + Eva',
+          'Jeux société adultes',
+          'Draps grands lits',
+          'Apéro',
+          'Brioche',
+          'Crudités (concombres / tomates)',
+          'Thé / Ricoré / Café instantané',
+          'Haricots verts',
+          'Soupes',
+          'Pompotes x 150',
+          'Goûter avec gateaux',
+          'Fruits / Légumes',
+          'Chips',
+          'Lingettes toilette',
+          'Pastilles lave-vaisselle',
+          'Liquide vaisselle',
+          'Lessive',
+          'PQ',
+          'Serviettes table',
+          'Lait Alice + Eva',
+          'Céréales matin',
+          'Yaourts / fromage blanc',
+        ],
+      },
     };
   </script>
 </html>
